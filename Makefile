@@ -53,6 +53,6 @@ test:  ## Run tests
 	@$(pipenv_bin)/python runtests.py
 
 upload-dist: install  ## Builds and uploads distribution
-	@rm -r ./build  # clean any existing build path assets
+	@rm -r ./build || echo "No build assets to remove"
 	curl -XGET https://packages.wdt.pdx.edu/publish.sh | VENV=$(pipenv) BUILD_TYPE=bdist_wheel bash -
-	@rm -rf ./*.egg-info
+	@rm -rf ./*.egg-info || echo "No egg assets to remove"

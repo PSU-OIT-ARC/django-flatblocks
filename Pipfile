@@ -8,6 +8,7 @@ Django = "~=4.2.0"
 
 [dev-packages]
 pip-audit = "*"
+setuptools = "*"
 textile = "~=4.0.0"
 Sphinx = "~=8.2.0"
 sphinx_rtd_theme = "~=3.0.0"
