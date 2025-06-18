@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+Django = "~=4.2.0"
+
+[dev-packages]
+pip-audit = "*"
+textile = "~=4.0.0"
+Sphinx = "~=8.2.0"
+sphinx_rtd_theme = "~=3.0.0"
+tblib = "~=3.1.0"
+coverage = "~=7.9.0"
+ruff = "~=0.12.0"
