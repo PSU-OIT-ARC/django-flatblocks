@@ -11,7 +11,7 @@ class Command(BaseCommand):
     help = "List unassigned flatblocks in the templates"
 
     def handle(self, *args, **options):
-        save_nodes = (len(args) and args[0] == 'create')
+        save_nodes = len(args) and args[0] == "create"
         flatblock_nodes = set()
         print_nodes = []
 
@@ -36,9 +36,11 @@ class Command(BaseCommand):
             if not FlatBlock.objects.filter(slug=node).exists():
                 # if create argument was supplied, save empty nodes
                 if save_nodes:
-                    FlatBlock.objects.create(header="[{0}]".format(node),
-                                             content="Generated flatblock",
-                                             slug=node)
+                    FlatBlock.objects.create(
+                        header="[{0}]".format(node),
+                        content="Generated flatblock",
+                        slug=node,
+                    )
                 print_nodes.append(node)
 
         if print_nodes:

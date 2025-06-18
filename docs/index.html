@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en-US" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>django-flatblocks &mdash; Django Flatblocks 4.2.0.dev0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/documentation_options.js?v=3dafe827"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="django-flatblocks" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Django Flatblocks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">django-flatblocks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Django Flatblocks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">django-flatblocks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="django-flatblocks">
+<h1>django-flatblocks<a class="headerlink" href="#django-flatblocks" title="Link to this heading">¶</a></h1>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you’d prefer, a <a class="reference external" href="https://psu-oit-arc.github.io/django-flatblocks/assets/flatblocks.pdf">PDF copy</a> of this documentation is available.</p>
+</div>
+<section id="id1">
+<h2>django-flatblocks<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>django-flatblocks is a simple application for handling small text-blocks on
+websites. Think about it like <code class="docutils literal notranslate"><span class="pre">django.contrib.flatpages</span></code> just not for a
+whole page but for only parts of it, like an information text describing what
+you can do on a site.</p>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h3>
+<p>Probably the easiest way to install this application is to first run
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">django-flatblocks</span></code>.  Once this step is complete add
+<code class="docutils literal notranslate"><span class="pre">&quot;flatblocks&quot;</span></code> to your <code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code> setting in your <code class="docutils literal notranslate"><span class="pre">settings.py</span></code>
+file and run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">syncdb</span></code> to update your database.</p>
+</section>
+<section id="upgrading">
+<h3>Upgrading<a class="headerlink" href="#upgrading" title="Link to this heading">¶</a></h3>
+<p>django-flatblocks uses <a class="reference external" href="http://south.aeracode.org/">South</a> for handling data and schema migrations
+starting with version 0.6.0, so the South-typical update path applies here.</p>
+<p>If you’re upgrading from a 0.5.x version or earlier you will have to migrate
+in 3 steps:</p>
+<ol class="arabic">
+<li><p>Install south.</p></li>
+<li><p>Migrate your database to the first version of flatblocks using South:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./manage.py<span class="w"> </span>migrate<span class="w"> </span>flatblocks<span class="w"> </span><span class="m">0001</span><span class="w"> </span>--fake
+</pre></div>
+</div>
+</li>
+<li><p>Then migrate your database to the latest version of flatblocks’ database
+and data structure:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./manage.py<span class="w"> </span>migrate<span class="w"> </span>flatblocks
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h3>
+<p>Once you’ve created some instances of the <code class="docutils literal notranslate"><span class="pre">flatblocks.models.FlatBlock</span></code>
+model, you can load it it using the <code class="docutils literal notranslate"><span class="pre">flatblocks</span></code> templatetag-library:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">flatblocks</span> <span class="cp">%}</span>
+
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="cm">&lt;!-- ... --&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;page&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;main&quot;</span><span class="p">&gt;</span>
+                <span class="cm">&lt;!-- ... --&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
+                <span class="cp">{%</span> <span class="k">flatblock</span> <span class="s2">&quot;page.info&quot;</span> <span class="cp">%}</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>This way you can display a text block with the name ‘page.info’. If you
+have the name of a block in a template variable, leave out the quotes.</p>
+<p>Additionally you can also specify which template should be used to render the
+flatblock:</p>
+<div class="highlight-django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">flatblock</span> <span class="s2">&quot;page.info&quot;</span> <span class="nv">using</span><span class="o">=</span><span class="s2">&quot;my_template.html&quot;</span> <span class="cp">%}</span>
+<span class="x">&lt;!-- --&gt;</span>
+<span class="cp">{%</span> <span class="k">flatblock</span> <span class="s2">&quot;page.about&quot;</span> <span class="nv">using</span><span class="o">=</span><span class="s2">&quot;my_template.html&quot;</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>If you want to simply output the value of the <code class="docutils literal notranslate"><span class="pre">content</span></code> field of a flatblock
+without using any template, you can use either options:</p>
+<div class="highlight-django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">flatblock</span> <span class="s2">&quot;page.info&quot;</span> <span class="nv">using</span><span class="o">=</span><span class="kp">False</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">plain_flatblock</span> <span class="s2">&quot;page.info&quot;</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>As with the slug of the flatblock also with the template name you have the
+choice of using the literal name of the template or pass it to the templatetag
+as a variable.</p>
+<p>The content of a flatblock (as well as its header) can also be evaluated as a
+full-fledged Django template:</p>
+<div class="highlight-django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">flatblock</span> <span class="s2">&quot;page.info&quot;</span> <span class="nv">evaluated</span><span class="o">=</span><span class="kp">True</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>This also works with the other parameters like the custom template and with
+the <code class="docutils literal notranslate"><span class="pre">plain_flatblock</span></code> templatetag:</p>
+<div class="highlight-django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">flatblock</span> <span class="s2">&quot;page.info&quot;</span> <span class="nv">evaluated</span><span class="o">=</span><span class="kp">True</span> <span class="nv">using</span><span class="o">=</span><span class="s2">&quot;my_template.html&quot;</span> <span class="cp">%}</span>
+<span class="x">&lt;!-- --&gt;</span>
+<span class="cp">{%</span> <span class="k">plain_flatblock</span> <span class="s2">&quot;page.about&quot;</span> <span class="nv">evaluated</span><span class="o">=</span><span class="kp">True</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</section>
+<section id="edit-view">
+<h3>edit-view<a class="headerlink" href="#edit-view" title="Link to this heading">¶</a></h3>
+<p>With <code class="docutils literal notranslate"><span class="pre">flatblocks.views.edit</span></code> django-flatblocks offers a simple view to edit
+your flatblocks from your frontend. To use it simply include it in your
+URLconf and create a <code class="docutils literal notranslate"><span class="pre">flatblocks/edit.html</span></code> template.</p>
+<p>By default the view doesn’t do any permission checking, so you should decorate
+it accordingly in your URLconf:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">flatblocks.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">edit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">login_required</span>
+
+<span class="c1"># ...</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">pattern</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^flatblocks/(?P&lt;pk&gt;\d+)/edit/$&#39;</span><span class="p">,</span> <span class="n">login_required</span><span class="p">(</span><span class="n">edit</span><span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;flatblocks-edit&#39;</span><span class="p">),</span>
+    <span class="c1"># ...</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>The template can operate on following variables:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">form</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flatblock</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">origin</span></code> (the URL of the previous page)</p></li>
+</ul>
+<p>Additionally the view offers some basic customization hooks via these keyword
+arguments:</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">template_name</span></code></dt><dd><p>Name of the template to be used for rendering this view. By default
+<code class="docutils literal notranslate"><span class="pre">flatblocks/edit.html</span></code> is used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">success_url</span></code></dt><dd><p>After successfully editing a flatblock the view will redirect the user to
+the URL specified here. By default the view will try to determine the last
+visited page before entering the edit-view (which is normally a page where
+the flatblock is used) and redirect the user back there.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">modelform_class</span></code></dt><dd><p>If you want to use a customized ModelForm class for flatblocks you can
+specify it here.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">permission_check</span></code></dt><dd><p>This argument lets you specify a callback function to do some
+flatblock-specific permission checking. Such a function could look like
+this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_permcheck</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">flatblock</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_staff</span> <span class="ow">or</span> <span class="n">flatblock</span><span class="o">.</span><span class="n">slug</span> <span class="o">==</span> <span class="s1">&#39;free_for_all&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With this permission callback set, a user that is not a staff-user is not
+allowed to edit this view unless it’s the “free_for_all” block. If these
+criteria are not met, the user is redirected to the root URL of the page.</p>
+<p>The contract here is pretty simple. The permission callback should return
+<code class="docutils literal notranslate"><span class="pre">False</span></code>, if the user should receive a 403 message when trying to edit
+this link. If the function returns an instance of <code class="docutils literal notranslate"><span class="pre">HttpResponse</span></code> the
+view will proceed from the assumption that your view already did
+everything there is to do and return that response-object. Any other
+return value tells the view that the permissions are OK for the current
+user and that it should proceed.</p>
+</dd>
+</dl>
+</section>
+<section id="history">
+<h3>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h3>
+<p>Since this application targets use-cases that are basically applicable to
+most web-projects out there, there are tons of solutions similar to this one.
+In fact, this app is a fork originally from <a class="reference external" href="http://code.google.com/p/django-chunks/">django-chunks</a> developed by
+Clint Ecker.</p>
+<p>In November 2008 Kevin Fricovsky created the <a class="reference external" href="http://github.com/howiworkdaily/django-flatblock/">original fork</a> in order to add
+an additional “active”-flag to each chunk. That project was later on <a class="reference external" href="http://github.com/lincolnloop/django-flatblock/">forked
+by Peter Baumgardner</a> who removed that flag again and added a “header”-field
+in order to directly associate and optional title with each text block.</p>
+<p>This fork aims now to add more features like variable chunks and also
+integrate some of the features developed by H. Waara and S. Cranford in
+the <a class="reference external" href="http://bitbucket.org/hakanw/django-better-chunks/">django-better-chunks</a> fork (<code class="docutils literal notranslate"><span class="pre">django.contrib.site</span></code>- and i18n-support).</p>
+</section>
+</section>
+<section id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">django-flatblocks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#upgrading">Upgrading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#edit-view">edit-view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#history">History</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-right" title="django-flatblocks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

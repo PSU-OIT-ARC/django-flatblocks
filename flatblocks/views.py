@@ -5,8 +5,14 @@ from flatblocks.forms import FlatBlockForm
 from flatblocks.models import FlatBlock
 
 
-def edit(request, pk, modelform_class=FlatBlockForm, permission_check=None,
-         template_name='flatblocks/edit.html', success_url=None):
+def edit(
+    request,
+    pk,
+    modelform_class=FlatBlockForm,
+    permission_check=None,
+    template_name="flatblocks/edit.html",
+    success_url=None,
+):
     """
     This view provides a simple editor implementation for flatblocks.
 
@@ -40,14 +46,14 @@ def edit(request, pk, modelform_class=FlatBlockForm, permission_check=None,
         permcheck_result = permission_check(request, flatblock)
         if permcheck_result is False:
             return HttpResponseForbidden(
-                _('You are not allowed to edit this flatblock'))
+                _("You are not allowed to edit this flatblock")
+            )
         if isinstance(permcheck_result, HttpResponse):
             return permcheck_result
 
-    session_key = 'flatblock.origin.%d' % (int(pk), )
-    if request.method == 'POST':
-        origin = request.session.get(session_key,
-                                     request.META.get('HTTP_REFERER', '/'))
+    session_key = "flatblock.origin.%d" % (int(pk),)
+    if request.method == "POST":
+        origin = request.session.get(session_key, request.META.get("HTTP_REFERER", "/"))
         form = modelform_class(request.POST, instance=flatblock)
         if form.is_valid():
             instance = form.save(commit=False)
@@ -57,17 +63,21 @@ def edit(request, pk, modelform_class=FlatBlockForm, permission_check=None,
             redirect_to = success_url if success_url else origin
             return redirect(redirect_to)
     else:
-        origin = request.META.get('HTTP_REFERER', '/')
+        origin = request.META.get("HTTP_REFERER", "/")
         # Don't set origin to this view's url no matter what
         origin = (
-            request.session.get(session_key, '/')
+            request.session.get(session_key, "/")
             if origin == request.get_full_path()
             else origin
         )
         form = modelform_class(instance=flatblock)
         request.session[session_key] = origin
-    return render(request, template_name, {
-        'form': form,
-        'origin': origin,
-        'flatblock': flatblock,
-    })
+    return render(
+        request,
+        template_name,
+        {
+            "form": form,
+            "origin": origin,
+            "flatblock": flatblock,
+        },
+    )

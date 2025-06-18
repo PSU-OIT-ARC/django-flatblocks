@@ -7,8 +7,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if len(args) != 1:
-            raise CommandError("This command requires the slug of the "
-                               "flatblock as its first argument")
+            raise CommandError(
+                "This command requires the slug of the flatblock as its first argument"
+            )
         slug = args[0]
         try:
             FlatBlock.objects.get(slug=slug).delete()

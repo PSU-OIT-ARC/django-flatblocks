@@ -11,6 +11,8 @@ ifneq ($(APP_ENV), "")
   pipenv_bin = "$(APP_ENV)/bin"
 endif
 
+ruff_target_python = "py311"
+
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -32,7 +34,7 @@ view-docs: documentation  ## Launches a Python HTTP server to view docs
 
 update_formatting:  ## Reformats source code given by path. Params 'target_path'
 	@echo "Formatting source tree ..."
-	@pipenv run ruff format --target-version $(ruff_target_python)  flatblocks
+	@pipenv run ruff format --target-version $(ruff_target_python) flatblocks
 	#@git ls-files -z -- 'flatblocks/templates/**/*.html' | xargs -0r pipenv run djade
 
 update_pip_requirements:  ## Updates python dependencies

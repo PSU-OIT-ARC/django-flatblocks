@@ -5,4 +5,4 @@ from flatblocks.models import FlatBlock
 class FlatBlockForm(ModelForm):
     class Meta:
         model = FlatBlock
-        exclude = ('slug', )
+        exclude = ("slug",)

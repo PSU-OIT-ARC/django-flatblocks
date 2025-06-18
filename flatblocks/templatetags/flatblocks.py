@@ -45,6 +45,7 @@ can easily for example offer administrative operations (like editing)
 within that template.
 
 """
+
 from __future__ import absolute_import
 
 import logging
@@ -55,30 +56,30 @@ from flatblocks import settings
 
 if VERSION >= (1, 7):
     from django.apps import apps
+
     get_model = apps.get_model
 else:
     from django.db import models
+
     get_model = models.get_model
 
 
 register = template.Library()
 logger = logging.getLogger(__name__)
 
-FlatBlock = get_model('flatblocks', 'flatblock')
+FlatBlock = get_model("flatblocks", "flatblock")
 
 
 @register.simple_tag(takes_context=True)
-def flatblock(context, slug, evaluated=False,
-              using='flatblocks/flatblock.html'):
-
+def flatblock(context, slug, evaluated=False, using="flatblocks/flatblock.html"):
     if not settings.AUTOCREATE_STATIC_BLOCKS:
         try:
             flatblock = FlatBlock.objects.get(slug=slug)
         except FlatBlock.DoesNotExist:
-            return ''
+            return ""
     else:
-        flatblock, _ = FlatBlock.objects.get_or_create(slug=slug,
-            defaults={'content': slug}
+        flatblock, _ = FlatBlock.objects.get_or_create(
+            slug=slug, defaults={"content": slug}
         )
 
     if evaluated:
@@ -89,7 +90,7 @@ def flatblock(context, slug, evaluated=False,
 
     if using:
         ctx = context.flatten()
-        ctx['flatblock'] = flatblock
+        ctx["flatblock"] = flatblock
         result = render_to_string(using, ctx)
     else:
         result = flatblock.content
