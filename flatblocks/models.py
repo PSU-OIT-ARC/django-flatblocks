@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class FlatBlock(models.Model):
+class AbstractFlatBlock(models.Model):
     """
     Think of a flatblock as a flatpage but for just part of a site. It's
     basically a piece of content with a given name (slug) and an optional
@@ -34,3 +34,5 @@ class FlatBlock(models.Model):
     class Meta:
         verbose_name = _("Flat block")
         verbose_name_plural = _("Flat blocks")
+
+        abstract = True

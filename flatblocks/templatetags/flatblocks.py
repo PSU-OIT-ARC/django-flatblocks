@@ -67,7 +67,7 @@ else:
 register = template.Library()
 logger = logging.getLogger(__name__)
 
-FlatBlock = get_model("flatblocks", "flatblock")
+FlatBlock = get_model(settings.FLATBLOCKS_MODEL)
 
 
 @register.simple_tag(takes_context=True)

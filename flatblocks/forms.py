@@ -1,8 +1,9 @@
 from django.forms import ModelForm
-from flatblocks.models import FlatBlock
+from django.apps import apps
+from django.conf import settings
 
 
 class FlatBlockForm(ModelForm):
     class Meta:
-        model = FlatBlock
+        model = apps.get_model(settings.FLATBLOCKS_MODEL)
         exclude = ("slug",)
