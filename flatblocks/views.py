@@ -43,9 +43,7 @@ def edit(
 
     If everything is alright with the permissions, simply return True.
     """
-    flatblock = get_object_or_404(
-        apps.get_model(settings.FLATBLOCKS_MODEL), pk=pk
-    )
+    flatblock = get_object_or_404(apps.get_model(settings.FLATBLOCKS_MODEL), pk=pk)
     if permission_check:
         permcheck_result = permission_check(request, flatblock)
         if permcheck_result is False:
